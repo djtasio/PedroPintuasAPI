@@ -1,14 +1,17 @@
 using API_PedroPinturas.Data;
-using API_PedroPinturas.Services;
+using API_PedroPinturas.DataAccess.Servicios;
+using API_PedroPinturas.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// """DATABASE AND DEPENDENCY INJECTION""" //
 var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
 builder.Services.AddDbContext<PedroPinturasDb>(options =>
     options.UseNpgsql(connectionString));
-builder.Services.AddSingleton(connectionString);
-builder.Services.AddScoped<ColorService, ColorService>();
+builder.Services.AddScoped<RespositoryAsync<Color>, RespositoryAsync<Color>>();
+// """DATABASE AND DEPENDENCY INJECTION""" //
+
 // Add services to the container.
 
 builder.Services.AddControllers();

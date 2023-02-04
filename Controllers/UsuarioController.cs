@@ -6,10 +6,10 @@ namespace API_PedroPinturas.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ColorController : ControllerBase
+public class UsuarioController : ControllerBase
 {
-    private readonly RespositoryAsync<Color> _repository;
-    public ColorController(RespositoryAsync<Color> repository)
+    private readonly RespositoryAsync<User> _repository;
+    public UsuarioController(RespositoryAsync<User> repository)
     {
         _repository = repository;
     }
@@ -27,6 +27,12 @@ public class ColorController : ControllerBase
        var color = await _repository.Get(id);
        if(color is null) return NotFound();
        return Ok(await _repository.Get(id)); 
+    }
+
+    [HttpPost, ActionName("CheckUsername")]
+    public async Task<bool> checkUsername(string username){
+        var entity = await _repository.Find(u => u.Username == username);
+        return (entity is null);
     }
 
 }
