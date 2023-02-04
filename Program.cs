@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
 builder.Services.AddDbContext<PedroPinturasDb>(options =>
     options.UseNpgsql(connectionString));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<RespositoryAsync<Color>, RespositoryAsync<Color>>();
 // """DATABASE AND DEPENDENCY INJECTION""" //
 

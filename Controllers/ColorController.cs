@@ -1,32 +1,16 @@
 using API_PedroPinturas.DataAccess.Servicios;
 using API_PedroPinturas.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_PedroPinturas.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ColorController : ControllerBase
+public class ColorController : BaseController<Model,Color>
 {
-    private readonly RespositoryAsync<Color> _repository;
-    public ColorController(RespositoryAsync<Color> repository)
+    public ColorController(RespositoryAsync<Color> repository, IMapper mapper) : base(repository, mapper)
     {
-        _repository = repository;
-    }
-
-    // GET all action
-    [HttpGet]
-    public async Task<IActionResult> GetAll(){
-        return Ok(await _repository.GetAll());
-    }
-
-    // GET by Id action
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
-    {
-       var color = await _repository.Get(id);
-       if(color is null) return NotFound();
-       return Ok(await _repository.Get(id)); 
     }
 
 }
