@@ -39,17 +39,16 @@ public abstract class BaseController<Model,Entity> : ControllerBase where Entity
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Model e){
-        Entity entity = _mapper.Map<Entity>(e);
-        if (id != e.Id) return BadRequest();
-        var element = await _repository.Get(id);
-        if(element is null) return NotFound();
-        if(element is null) return BadRequest();
-        if(!ModelState.IsValid) return BadRequest();
+    public async Task<IActionResult> Update(int id,[FromBody] Entity entity){
+        if(!ModelState.IsValid)
+            return BadRequest(ModelState);
+        Model model;
+        model = _mapper.Map<Model>(entity);
+        if(id != model.Id)
+            return NotFound();
 
-        await _repository.Update(element);
-        Console.WriteLine((element as Color));
-        return NoContent();
+        await _repository.Update(entity);
+        return Ok(entity);
     }
 
     [HttpDelete("{id}")]
