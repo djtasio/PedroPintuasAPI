@@ -1,5 +1,5 @@
-using API_PedroPinturas.DataAccess.Servicios;
 using API_PedroPinturas.Models;
+using API_PedroPinturas.DataAccess.Servicios;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_PedroPinturas.Controllers;
@@ -8,8 +8,8 @@ namespace API_PedroPinturas.Controllers;
 [Route("[controller]")]
 public class UsuarioController : ControllerBase
 {
-    private readonly RespositoryAsync<User> _repository;
-    public UsuarioController(RespositoryAsync<User> repository)
+    private readonly RespositoryAsync<Usuario> _repository;
+    public UsuarioController(RespositoryAsync<Usuario> repository)
     {
         _repository = repository;
     }
@@ -24,15 +24,23 @@ public class UsuarioController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-       var color = await _repository.Get(id);
-       if(color is null) return NotFound();
+       var pizza = await _repository.Get(id);
+       if(pizza is null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
 
-    [HttpPost, ActionName("CheckUsername")]
-    public async Task<bool> checkUsername(string username){
-        var entity = await _repository.Find(u => u.Username == username);
-        return (entity is null);
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] Usuario user){
+        if(user is null) return BadRequest();
+        //Si lo que me están mandando no coincide con el modelo que yo he recibido
+        if(!ModelState.IsValid) return BadRequest(ModelState);
+        var created = await _repository.Insert(user);
+        return Created("created",created);
     }
 
+    [HttpPost("Username"), ActionName("CheckUsername")]
+    public async Task<bool> checkUsername(string username){
+        var entity = await _repository.Find(u => u.User == username);
+        return (entity is null);
+    }
 }

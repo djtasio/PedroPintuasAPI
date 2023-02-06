@@ -10,6 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConn
 builder.Services.AddDbContext<PedroPinturasDb>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddScoped<RespositoryAsync<Color>, RespositoryAsync<Color>>();
+builder.Services.AddScoped<RespositoryAsync<Usuario>, RespositoryAsync<Usuario>>();
 // """DATABASE AND DEPENDENCY INJECTION""" //
 
 // Add services to the container.
