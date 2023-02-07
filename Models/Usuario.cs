@@ -14,7 +14,7 @@ public class Usuario{
     [Required]
     public string? NombreApellidos { get; set; }
     [Required]
-    [Range(0, 9)]
+    //[Range(8, 10)]
     public int Telefono { get; set; }
     public List<Pedido>? Pedidos{ get; set; }
 }

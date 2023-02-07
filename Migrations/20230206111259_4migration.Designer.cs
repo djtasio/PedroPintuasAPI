@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230201161511_firstmigration")]
-    partial class firstmigration
+    [Migration("20230206111259_4migration")]
+    partial class _4migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,22 +59,23 @@ namespace APIPedroPinturas.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("Fecha")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<double>("Precio")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("Precio")
+                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<int?>("ProductosId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int?>("UsuarioId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductosId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
                 });
@@ -112,7 +113,7 @@ namespace APIPedroPinturas.Migrations
                     b.ToTable("Productos");
                 });
 
-            modelBuilder.Entity("API_PedroPinturas.Models.User", b =>
+            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,19 +121,25 @@ namespace APIPedroPinturas.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("NombreApellidos")
+                    b.Property<string>("Contrasenia")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("NombreApellidos")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Telefono")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("User")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("User")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -143,9 +150,9 @@ namespace APIPedroPinturas.Migrations
                         .WithMany()
                         .HasForeignKey("ProductosId");
 
-                    b.HasOne("API_PedroPinturas.Models.User", null)
+                    b.HasOne("API_PedroPinturas.Models.Usuario", null)
                         .WithMany("Pedidos")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("Productos");
                 });
@@ -159,7 +166,7 @@ namespace APIPedroPinturas.Migrations
                     b.Navigation("Color");
                 });
 
-            modelBuilder.Entity("API_PedroPinturas.Models.User", b =>
+            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
                 {
                     b.Navigation("Pedidos");
                 });

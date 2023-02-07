@@ -39,8 +39,8 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost("Username"), ActionName("CheckUsername")]
-    public async Task<bool> checkUsername(string username){
-        var entity = await _repository.Find(u => u.User == username);
-        return (entity is null);
+    public async Task<int> checkUsername(string user){
+        Usuario entity = await _repository.Find(u => u.User == user);
+        return entity.Id;
     }
 }

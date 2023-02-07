@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     /// <inheritdoc />
-    public partial class firstmigration : Migration
+    public partial class secondmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,9 +32,9 @@ namespace APIPedroPinturas.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Username = table.Column<string>(type: "text", nullable: true),
-                    Password = table.Column<string>(type: "text", nullable: true),
-                    NombreApellidos = table.Column<string>(type: "text", nullable: true),
+                    User = table.Column<string>(type: "text", nullable: false),
+                    Contrasenia = table.Column<string>(type: "text", nullable: false),
+                    NombreApellidos = table.Column<string>(type: "text", nullable: false),
                     Telefono = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -75,8 +75,8 @@ namespace APIPedroPinturas.Migrations
                     ProductosId = table.Column<int>(type: "integer", nullable: true),
                     Entrega24h = table.Column<bool>(type: "boolean", nullable: false),
                     Direccion = table.Column<string>(type: "text", nullable: true),
-                    Precio = table.Column<double>(type: "double precision", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    Precio = table.Column<decimal>(type: "numeric(5,2)", nullable: false),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,8 +87,8 @@ namespace APIPedroPinturas.Migrations
                         principalTable: "Productos",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Pedidos_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Pedidos_Users_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
@@ -99,14 +99,20 @@ namespace APIPedroPinturas.Migrations
                 column: "ProductosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_UserId",
+                name: "IX_Pedidos_UsuarioId",
                 table: "Pedidos",
-                column: "UserId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Productos_ColorId",
                 table: "Productos",
                 column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_User",
+                table: "Users",
+                column: "User",
+                unique: true);
         }
 
         /// <inheritdoc />
