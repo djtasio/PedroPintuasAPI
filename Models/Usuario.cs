@@ -1,5 +1,6 @@
 namespace API_PedroPinturas.Models;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,4 +18,9 @@ public class Usuario{
     //[Range(8, 10)]
     public int Telefono { get; set; }
     public List<Pedido>? Pedidos{ get; set; }
+
+    public static implicit operator int(Usuario v)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -28,5 +28,4 @@ public class ColorController : ControllerBase
        if(pizza is null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
-
 }

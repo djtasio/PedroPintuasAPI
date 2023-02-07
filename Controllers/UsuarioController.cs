@@ -38,8 +38,8 @@ public class UsuarioController : ControllerBase
         return Created("created",created);
     }
 
-    [HttpPost("Username"), ActionName("CheckUsername")]
-    public async Task<int> checkUsername(string user){
+    [HttpGet("Username/{user}"), ActionName("CheckUsername")]
+    public async Task<int> checkUsername([FromBody] string user){
         Usuario entity = await _repository.Find(u => u.User == user);
         return entity.Id;
     }
