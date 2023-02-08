@@ -11,6 +11,7 @@ builder.Services.AddDbContext<PedroPinturasDb>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddScoped<RespositoryAsync<Color>, RespositoryAsync<Color>>();
 builder.Services.AddScoped<RespositoryAsync<Usuario>, RespositoryAsync<Usuario>>();
+builder.Services.AddScoped<RespositoryAsync<Pedido>, RespositoryAsync<Pedido>>();
 // """DATABASE AND DEPENDENCY INJECTION""" //
 
 // Add services to the container.
