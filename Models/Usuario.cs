@@ -12,9 +12,9 @@ public class Usuario{
     public string? User { get; set; }
     [Required]
     public string? Contrasenia { get; set; }
-    [Required]
+    //[Required]
     public string? NombreApellidos { get; set; }
-    [Required]
+    //[Required]
     //[Range(8, 10)]
     public int Telefono { get; set; }
     public List<Pedido>? Pedidos{ get; set; }

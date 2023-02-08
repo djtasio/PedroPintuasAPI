@@ -24,8 +24,8 @@ public class UsuarioController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-       var pizza = await _repository.Get(id);
-       if(pizza is null) return NotFound();
+       var usuario = await _repository.Get(id);
+       if(usuario is null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
 
@@ -38,9 +38,26 @@ public class UsuarioController : ControllerBase
         return Created("created",created);
     }
 
+    [HttpPost("Login")]
+    public async Task<int> Login([FromBody] Usuario user){
+        /*if(username is null) return BadRequest();
+        if(password is null) return BadRequest();*/
+        //Si lo que me están mandando no coincide con el modelo que yo he recibido
+       Usuario entity = await _repository.Find(u => u.User == user.User && u.Contrasenia == user.Contrasenia);
+        if(entity != null){
+            return entity.Id;
+        } else {
+            return -1; 
+        }
+    }
+
     [HttpGet("Username/{user}"), ActionName("CheckUsername")]
-    public async Task<int> checkUsername([FromBody] string user){
+    public async Task<int> checkUsername(string user){
         Usuario entity = await _repository.Find(u => u.User == user);
-        return entity.Id;
+        if(entity != null){
+            return entity.Id;
+        } else {
+            return -1;
+        }
     }
 }

@@ -123,7 +123,6 @@ namespace APIPedroPinturas.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("NombreApellidos")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Telefono")
@@ -138,7 +137,7 @@ namespace APIPedroPinturas.Migrations
                     b.HasIndex("User")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>

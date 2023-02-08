@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     /// <inheritdoc />
-    public partial class secondmigration : Migration
+    public partial class _4migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,19 +27,19 @@ namespace APIPedroPinturas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Usuarios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     User = table.Column<string>(type: "text", nullable: false),
                     Contrasenia = table.Column<string>(type: "text", nullable: false),
-                    NombreApellidos = table.Column<string>(type: "text", nullable: false),
+                    NombreApellidos = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,9 +87,9 @@ namespace APIPedroPinturas.Migrations
                         principalTable: "Productos",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Pedidos_Users_UsuarioId",
+                        name: "FK_Pedidos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Users",
+                        principalTable: "Usuarios",
                         principalColumn: "Id");
                 });
 
@@ -109,8 +109,8 @@ namespace APIPedroPinturas.Migrations
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_User",
-                table: "Users",
+                name: "IX_Usuarios_User",
+                table: "Usuarios",
                 column: "User",
                 unique: true);
         }
@@ -125,7 +125,7 @@ namespace APIPedroPinturas.Migrations
                 name: "Productos");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Colores");
