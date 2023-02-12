@@ -25,7 +25,7 @@ public class ColorController : ControllerBase
     public async Task<IActionResult> Get(int id)
     {
        var color = await _repository.Get(id);
-       if(color is null) return NotFound();
+       if(color == null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
 }

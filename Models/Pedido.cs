@@ -13,4 +13,6 @@ public class Pedido{
     public string? Direccion { get; set; }
     [Column(TypeName = "decimal(5, 2)")]
     public double Precio { get; set; }
+
+    
 }

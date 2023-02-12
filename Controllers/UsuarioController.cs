@@ -25,13 +25,13 @@ public class UsuarioController : ControllerBase
     public async Task<IActionResult> Get(int id)
     {
        var usuario = await _repository.Get(id);
-       if(usuario is null) return NotFound();
+       if(usuario == null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Usuario user){
-        if(user is null) return BadRequest();
+        if(user == null) return BadRequest();
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         if(!ModelState.IsValid) return BadRequest(ModelState);
         var created = await _repository.Insert(user);

@@ -25,13 +25,13 @@ public class PedidoController : ControllerBase
     public async Task<IActionResult> Get(int id)
     {
        var pedido = await _repository.Get(id);
-       if(pedido is null) return NotFound();
+       if(pedido == null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Pedido pedido){
-        if(pedido is null) return BadRequest();
+        if(pedido == null) return BadRequest();
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         if(!ModelState.IsValid) return BadRequest(ModelState);
         var created = await _repository.Insert(pedido);
