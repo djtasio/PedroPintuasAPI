@@ -12,6 +12,7 @@ builder.Services.AddDbContext<PedroPinturasDb>(options =>
 builder.Services.AddScoped<RespositoryAsync<Color>, RespositoryAsync<Color>>();
 builder.Services.AddScoped<RespositoryAsync<Usuario>, RespositoryAsync<Usuario>>();
 builder.Services.AddScoped<RespositoryAsync<Pedido>, RespositoryAsync<Pedido>>();
+builder.Services.AddScoped<RespositoryAsync<Producto>, RespositoryAsync<Producto>>();
 // """DATABASE AND DEPENDENCY INJECTION""" //
 
 // Add services to the container.

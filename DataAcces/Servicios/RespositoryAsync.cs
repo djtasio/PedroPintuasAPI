@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using API_PedroPinturas.Data;
 using API_PedroPinturas.DataAccess.Interfaces;
 using System.Linq.Expressions;
+using API_PedroPinturas.Models;
+using System.Linq;
 
 namespace API_PedroPinturas.DataAccess.Servicios{
 
@@ -24,8 +26,20 @@ namespace API_PedroPinturas.DataAccess.Servicios{
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await EntitySet.ToListAsync();
+           return await EntitySet.ToListAsync();
         }
+
+        // Hacer el InnerJoin genérico
+        public async Task<IEnumerable<T>> GetAllInnerJoin(List<string> lista)
+        {
+            IQueryable<T>? query = EntitySet;
+            lista.ForEach(delegate(string model){
+                query = query.Include(model);
+            });
+            return await query.ToListAsync();
+        }
+
+        
 
         public async Task<T> Get(int id)
         {
@@ -49,7 +63,8 @@ namespace API_PedroPinturas.DataAccess.Servicios{
 
         public async Task Update(T entity)
         {
-            Db.Entry(entity).State = EntityState.Modified;
+            /*Db.Entry(entity).State = EntityState.Modified;*/
+            EntitySet.Attach(entity);
             await Save();
         }
 
@@ -57,6 +72,26 @@ namespace API_PedroPinturas.DataAccess.Servicios{
         {
             // NO LE DA SEGUIMIENTO A LA ENTIDAD QUE NOS VA A REFLEJAR LA CONSULTA
             return await EntitySet.AsNoTracking().FirstOrDefaultAsync(expr);
+        }
+
+        /*public async List<T> Find(Expression<Func<T, bool>> expr)
+        {
+            // NO LE DA SEGUIMIENTO A LA ENTIDAD QUE NOS VA A REFLEJAR LA CONSULTA
+            //return await EntitySet.AsNoTracking().FirstOrDefaultAsync(expr);
+            return  EntitySet.Include("Posts").ToList();
+
+        }*/
+
+           /*public async IEnumerable<T> Query(IEnumerable<T> inner, Func<T, T> outerKeySelector, Func<T, T> innerKeySelector, Func<T, T, T> resultSelector)
+        {
+            // NO LE DA SEGUIMIENTO A LA ENTIDAD QUE NOS VA A REFLEJAR LA CONSULTA
+            return EntitySet.AsNoTracking().Join(inner,outerKeySelector,innerKeySelector,resultSelector);
+        }*/
+
+        public async Task<T> DoEntry(T entity){
+             Db.Entry(entity).State = EntityState.Added;
+             await Save();
+             return entity;
         }
     }
 }

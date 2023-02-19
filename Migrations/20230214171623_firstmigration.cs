@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     /// <inheritdoc />
-    public partial class _4migration : Migration
+    public partial class firstmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,28 @@ namespace APIPedroPinturas.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pedidos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Entrega24h = table.Column<bool>(type: "boolean", nullable: false),
+                    Direccion = table.Column<string>(type: "text", nullable: true),
+                    Precio = table.Column<decimal>(type: "numeric(5,2)", nullable: false),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pedidos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pedidos_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Productos",
                 columns: table => new
                 {
@@ -53,7 +75,8 @@ namespace APIPedroPinturas.Migrations
                     Precio = table.Column<double>(type: "double precision", nullable: false),
                     Descripcion = table.Column<string>(type: "text", nullable: true),
                     Calidad = table.Column<string>(type: "text", nullable: true),
-                    Productos = table.Column<string>(type: "text", nullable: true)
+                    Productos = table.Column<string>(type: "text", nullable: true),
+                    PedidoId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,40 +86,12 @@ namespace APIPedroPinturas.Migrations
                         column: x => x.ColorId,
                         principalTable: "Colores",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pedidos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ProductosId = table.Column<int>(type: "integer", nullable: true),
-                    Entrega24h = table.Column<bool>(type: "boolean", nullable: false),
-                    Direccion = table.Column<string>(type: "text", nullable: true),
-                    Precio = table.Column<decimal>(type: "numeric(5,2)", nullable: false),
-                    UsuarioId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pedidos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Productos_ProductosId",
-                        column: x => x.ProductosId,
-                        principalTable: "Productos",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Pedidos_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        name: "FK_Productos_Pedidos_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "Pedidos",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_ProductosId",
-                table: "Pedidos",
-                column: "ProductosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_UsuarioId",
@@ -109,6 +104,11 @@ namespace APIPedroPinturas.Migrations
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Productos_PedidoId",
+                table: "Productos",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_User",
                 table: "Usuarios",
                 column: "User",
@@ -119,16 +119,16 @@ namespace APIPedroPinturas.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Pedidos");
-
-            migrationBuilder.DropTable(
                 name: "Productos");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Colores");
 
             migrationBuilder.DropTable(
-                name: "Colores");
+                name: "Pedidos");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }

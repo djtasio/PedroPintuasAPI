@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230207194510_4migration")]
-    partial class _4migration
+    [Migration("20230214185417_thirdmigration")]
+    partial class thirdmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,22 +58,13 @@ namespace APIPedroPinturas.Migrations
                     b.Property<bool>("Entrega24h")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("Fecha")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(5, 2)");
-
-                    b.Property<int?>("ProductosId")
-                        .HasColumnType("integer");
 
                     b.Property<int?>("UsuarioId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductosId");
 
                     b.HasIndex("UsuarioId");
 
@@ -100,6 +91,9 @@ namespace APIPedroPinturas.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
 
+                    b.Property<int?>("PedidoId")
+                        .HasColumnType("integer");
+
                     b.Property<double>("Precio")
                         .HasColumnType("double precision");
 
@@ -109,6 +103,8 @@ namespace APIPedroPinturas.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ColorId");
+
+                    b.HasIndex("PedidoId");
 
                     b.ToTable("Productos");
                 });
@@ -145,15 +141,9 @@ namespace APIPedroPinturas.Migrations
 
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
-                    b.HasOne("API_PedroPinturas.Models.Producto", "Productos")
-                        .WithMany()
-                        .HasForeignKey("ProductosId");
-
                     b.HasOne("API_PedroPinturas.Models.Usuario", null)
                         .WithMany("Pedidos")
                         .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Productos");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Producto", b =>
@@ -162,7 +152,16 @@ namespace APIPedroPinturas.Migrations
                         .WithMany()
                         .HasForeignKey("ColorId");
 
+                    b.HasOne("API_PedroPinturas.Models.Pedido", null)
+                        .WithMany("Productos")
+                        .HasForeignKey("PedidoId");
+
                     b.Navigation("Color");
+                });
+
+            modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
+                {
+                    b.Navigation("Productos");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>

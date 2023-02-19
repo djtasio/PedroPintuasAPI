@@ -17,7 +17,7 @@ public class UsuarioController : ControllerBase
     // GET all action
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        return Ok(await _repository.GetAll());
+        return Ok(await _repository.GetAllInnerJoin(new List<string>{"Pedidos","Pedidos.Productos","Pedidos.Productos.Color"}));
     }
 
     // GET by Id action
@@ -37,6 +37,19 @@ public class UsuarioController : ControllerBase
         var created = await _repository.Insert(user);
         return Created("created",created);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] Usuario user){
+        if (id != user.Id) return BadRequest();
+        if(user == null) return BadRequest();
+        /*var userElement = await _repository.Get(id); .AsNoTracking() en el repository
+        if(userElement == null) return NotFound();*/
+        if(!ModelState.IsValid) return BadRequest();
+
+        await _repository.Update(user);
+        return NoContent();
+    }
+
 
     [HttpPost("Login")]
     public async Task<int> Login([FromBody] Usuario user){

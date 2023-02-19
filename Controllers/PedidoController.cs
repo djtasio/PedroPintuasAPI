@@ -34,7 +34,7 @@ public class PedidoController : ControllerBase
         if(pedido == null) return BadRequest();
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         if(!ModelState.IsValid) return BadRequest(ModelState);
-        var created = await _repository.Insert(pedido);
+        var created = await _repository.DoEntry(pedido);
         return Created("created",created);
     }
 
