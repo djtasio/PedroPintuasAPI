@@ -7,13 +7,14 @@ public class Pedido{
     [Key]// [Column("blog_id")]
     public int Id { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //PARA QUE INSERTE AL INSERTAR EL PRODUCTO
-    /*[Column("created_at")]
-    public DateTime Fecha { get; set; }*/
-    public List<Producto>? Productos { get; set; }
+    //[Column("created_at")]
+    public DateTime? Fecha { get; set; } = DateTime.UtcNow;
+    public List<Compra>? Compras { get; set; }
     public bool Entrega24h { get; set; }
     public string? Direccion { get; set; }
     [Column(TypeName = "decimal(5, 2)")]
     public double Precio { get; set; }
 
-    
+    [ForeignKey("UsuarioId")]
+    public virtual Usuario Usuario {get;set;}
 }

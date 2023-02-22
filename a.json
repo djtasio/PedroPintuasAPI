@@ -1,0 +1,89 @@
+{
+    "fecha": "2023-02-21T17:02:20.061Z",
+    "compra": [
+      {
+        "cantidad":1,
+        "producto":{
+            "id": 1,
+            "color": {
+                "id": 1,
+                "name": "Azul",
+                "code": "#0000FFF"
+            },
+            "precio": 5.4,
+            "descripcion": "Descripcion",
+            "calidad": "Premium",
+            "productos": "Spray"
+        }
+  
+      }
+    ],
+    "entrega24h": true,
+    "direccion": "string",
+    "precio": 0,
+    "usuario": {
+        "id": 1,
+        "user": "a",
+        "contrasenia": "a",
+        "nombreApellidos": "a",
+        "telefono": 123456789
+    }
+  }
+
+  {
+    "compras": [
+      {
+        "producto":{
+            "id": 1,
+            "color": {
+                "id": 1,
+                "name": "Azul",
+                "code": "#0000FFF"
+            },
+            "precio": 5.4,
+            "descripcion": "Descripcion",
+            "calidad": "Premium",
+            "productos": "Spray"
+        },
+        "cantidad": 1
+      }
+    ],
+    "entrega24h": true,
+    "direccion": "string",
+    "precio": 7,
+    "usuarioFK": 1
+  }
+
+  [
+    {
+      "producto": {
+            "id": 1,
+            "color": {
+              "id": 1,
+              "name": "Verde",
+              "code": "#43244FF"
+            },
+            "precio": 5.4,
+            "descripcion": "Desc\nripcion",
+            "calidad": "Premium",
+            "productos": "Spray"
+      },
+      "cantidad": 1
+    },
+
+    {
+        "producto": {
+              "id": 2,
+              "color": {
+                "id": 1,
+                "name": "Verde",
+                "code": "#43244FF"
+              },
+              "precio": 5.4,
+              "descripcion": "Desc\nripcion",
+              "calidad": "Premium",
+              "productos": "Cubo"
+        },
+        "cantidad": 1
+      }
+  ]

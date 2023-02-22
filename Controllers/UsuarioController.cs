@@ -17,7 +17,7 @@ public class UsuarioController : ControllerBase
     // GET all action
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        return Ok(await _repository.GetAllInnerJoin(new List<string>{"Pedidos","Pedidos.Productos","Pedidos.Productos.Color"}));
+        return Ok(await _repository.GetAllInnerJoin(new List<string>{"Pedidos","Pedidos.Compras","Pedidos.Compras.Producto","Pedidos.Compras.Producto.Color"}));
     }
 
     // GET by Id action
@@ -26,7 +26,7 @@ public class UsuarioController : ControllerBase
     {
        var usuario = await _repository.Get(id);
        if(usuario == null) return NotFound();
-       return Ok(await _repository.Get(id)); 
+       return Ok(await _repository.GetInnerJoin(id,u => u.Id == id,new List<string>{"Pedidos","Pedidos.Compras","Pedidos.Compras.Producto","Pedidos.Compras.Producto.Color"})); 
     }
 
     [HttpPost]

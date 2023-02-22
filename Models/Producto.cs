@@ -6,7 +6,6 @@ public class Producto{
     [Key]
     public int Id { get; set; }
     public Color? Color { get; set; }
-    public int Cantidad { get; set; }
     public double Precio { get; set; }
     public string? Descripcion { get; set; }
     public string? Calidad { get; set; }

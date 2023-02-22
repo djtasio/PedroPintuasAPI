@@ -39,11 +39,17 @@ namespace API_PedroPinturas.DataAccess.Servicios{
             return await query.ToListAsync();
         }
 
-        
-
         public async Task<T> Get(int id)
         {
             return await EntitySet.FindAsync(id);
+        }
+
+        public async Task<T> GetInnerJoin(int id,Expression<Func<T, bool>> expr,List<string> lista){
+            IQueryable<T>? query = EntitySet;
+            foreach(string model in lista){
+                query = query.Include(model);
+            }
+            return await query.FirstOrDefaultAsync(expr);
         }
 
         public async Task<T> Insert(T entity)
@@ -63,8 +69,8 @@ namespace API_PedroPinturas.DataAccess.Servicios{
 
         public async Task Update(T entity)
         {
-            /*Db.Entry(entity).State = EntityState.Modified;*/
-            EntitySet.Attach(entity);
+            Db.Entry(entity).State = EntityState.Modified;
+            //EntitySet.Attach(entity);
             await Save();
         }
 
@@ -90,6 +96,12 @@ namespace API_PedroPinturas.DataAccess.Servicios{
 
         public async Task<T> DoEntry(T entity){
              Db.Entry(entity).State = EntityState.Added;
+             await Save();
+             return entity;
+        }
+
+        public async Task<T> DoAttach(T entity){
+             EntitySet.Attach(entity);
              await Save();
              return entity;
         }
