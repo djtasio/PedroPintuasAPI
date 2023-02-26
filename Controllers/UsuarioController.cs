@@ -20,13 +20,21 @@ public class UsuarioController : ControllerBase
         return Ok(await _repository.GetAllInnerJoin(new List<string>{"Pedidos","Pedidos.Compras","Pedidos.Compras.Producto","Pedidos.Compras.Producto.Color"}));
     }
 
+     [HttpGet("pedidos/{id}")]
+    public async Task<IActionResult> GetInnerJoin(int id)
+    {
+       var usuario = await _repository.Get(id);
+       if(usuario == null) return NotFound();
+       return Ok(await _repository.GetInnerJoin(id,u => u.Id == id,new List<string>{"Pedidos","Pedidos.Compras","Pedidos.Compras.Producto","Pedidos.Compras.Producto.Color"})); 
+    }
+
     // GET by Id action
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
        var usuario = await _repository.Get(id);
        if(usuario == null) return NotFound();
-       return Ok(await _repository.GetInnerJoin(id,u => u.Id == id,new List<string>{"Pedidos","Pedidos.Compras","Pedidos.Compras.Producto","Pedidos.Compras.Producto.Color"})); 
+       return Ok(await _repository.Get(id)); 
     }
 
     [HttpPost]

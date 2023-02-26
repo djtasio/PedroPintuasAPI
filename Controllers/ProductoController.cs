@@ -26,7 +26,7 @@ public class ProductoController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-       var usuario = await _repository.GetInnerJoin(id,p => p.Id == id,new List<string>{"Color"});
+       var usuario = await _repository.Get(id);
        if(usuario == null) return NotFound();
        return Ok(await _repository.Get(id)); 
     }
@@ -48,7 +48,7 @@ public class ProductoController : ControllerBase
         if(password is null) return BadRequest();*/
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         Producto entity = await _repository.Find(p => p.Productos == producto.Productos && 
-        p.Calidad == producto.Calidad &&  p.Color == producto.Color);
+        p.Calidad == producto.Calidad &&  p.Color == p.Color);
         return await Get(entity.Id);
     }
 }

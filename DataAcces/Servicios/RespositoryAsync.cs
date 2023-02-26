@@ -80,20 +80,6 @@ namespace API_PedroPinturas.DataAccess.Servicios{
             return await EntitySet.AsNoTracking().FirstOrDefaultAsync(expr);
         }
 
-        /*public async List<T> Find(Expression<Func<T, bool>> expr)
-        {
-            // NO LE DA SEGUIMIENTO A LA ENTIDAD QUE NOS VA A REFLEJAR LA CONSULTA
-            //return await EntitySet.AsNoTracking().FirstOrDefaultAsync(expr);
-            return  EntitySet.Include("Posts").ToList();
-
-        }*/
-
-           /*public async IEnumerable<T> Query(IEnumerable<T> inner, Func<T, T> outerKeySelector, Func<T, T> innerKeySelector, Func<T, T, T> resultSelector)
-        {
-            // NO LE DA SEGUIMIENTO A LA ENTIDAD QUE NOS VA A REFLEJAR LA CONSULTA
-            return EntitySet.AsNoTracking().Join(inner,outerKeySelector,innerKeySelector,resultSelector);
-        }*/
-
         public async Task<T> DoEntry(T entity){
              Db.Entry(entity).State = EntityState.Added;
              await Save();
@@ -101,7 +87,7 @@ namespace API_PedroPinturas.DataAccess.Servicios{
         }
 
         public async Task<T> DoAttach(T entity){
-             EntitySet.Attach(entity);
+             EntitySet.AttachRange(entity);
              await Save();
              return entity;
         }

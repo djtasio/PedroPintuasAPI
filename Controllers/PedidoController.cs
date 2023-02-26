@@ -17,7 +17,7 @@ public class PedidoController : ControllerBase
     // GET all action
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        return Ok(await _repository.GetAll());
+        return Ok(await _repository.GetAllInnerJoin(new List<string>{"Compras","Compras.Producto","Compras.Producto.Color"}));
     }
 
     // GET by Id action
@@ -34,7 +34,7 @@ public class PedidoController : ControllerBase
         if(pedido == null) return BadRequest();
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         if(!ModelState.IsValid) return BadRequest(ModelState);
-        var created = await _repository.DoEntry(pedido);
+        var created = await _repository.DoAttach(pedido);
         return Created("created",created);
     }
 

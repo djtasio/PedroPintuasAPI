@@ -17,7 +17,7 @@ public class CompraController : ControllerBase
     // GET all action
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        return Ok(await _repository.GetAll());
+        return Ok(await _repository.GetAllInnerJoin(new List<string>{"Producto","Producto.Color"}));
     }
 
     // GET by Id action
@@ -32,10 +32,7 @@ public class CompraController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] List<Compra> compras){
         if(compras == null) return BadRequest();
-        //Si lo que me están mandando no coincide con el modelo que yo he recibido
         if(!ModelState.IsValid) return BadRequest(ModelState);
-        //Do entry porque el color que le añadimos al producto ya existe en la base de datos y por
-        //tanto no queremos insertarlo, sino cogerlo
         List<Compra> comprasDevolver = new List<Compra>();
         foreach(Compra compra in compras){
             var created = await _repository.DoEntry(compra);

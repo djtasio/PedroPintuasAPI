@@ -8,9 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Usuario{
     [Key]
     public int Id { get; set; }
-    [Required]
     public string? User { get; set; }
-    [Required]
     public string? Contrasenia { get; set; }
     //[Required]
     public string? NombreApellidos { get; set; }
