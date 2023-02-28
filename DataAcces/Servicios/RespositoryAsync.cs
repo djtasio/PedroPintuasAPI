@@ -52,6 +52,15 @@ namespace API_PedroPinturas.DataAccess.Servicios{
             return await query.FirstOrDefaultAsync(expr);
         }
 
+        public async Task<T> GetOrderBy(int id,Expression<Func<T, bool>> expr,
+        List<string> lista,Expression<Func<T, DateTime?>> orderby){
+            IQueryable<T>? query = EntitySet;
+            foreach(string model in lista){
+                query = query.Include(model);
+            }
+            return await query.OrderBy(orderby).FirstOrDefaultAsync(expr);
+        }
+
         public async Task<T> Insert(T entity)
         {
             EntitySet.Add(entity);

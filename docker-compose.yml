@@ -1,0 +1,20 @@
+version: "1"
+services:
+  api:
+    build: .
+    ports:
+      - "6677:5062"
+    links:
+      - postgresfinal
+  postgresfinal:
+    image: postgres
+    ports:
+      - "7766:5432"
+    environment:
+      - POSTGRES_PASSWORD=sanvalero12
+    volumes: 
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+
