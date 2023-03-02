@@ -17,7 +17,7 @@ public class ColorController : ControllerBase
     // GET all action
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        return Ok(await _repository.GetAll());
+        return Ok(await _repository.GetAllOrderBy(c => c.Name));
     }
 
     // GET by Id action

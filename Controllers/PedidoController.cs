@@ -29,6 +29,20 @@ public class PedidoController : ControllerBase
        return Ok(await _repository.Get(id)); 
     }
 
+    // GET by Id action
+    [HttpGet("user/{id}")]
+    public async Task<IActionResult> GetUser(int id)
+    {
+       return Ok(await _repository.GetOrderBy(id,new List<string>{"Compras","Compras.Producto","Compras.Producto.Color","Usuario"},p => p.Usuario.Id == id, p => p.Fecha)); 
+    }
+
+        // GET by Id action
+    [HttpGet("date/{datetime}")]
+    public async Task<IActionResult> GetDate(string datetime)
+    {
+       return Ok(await _repository.Filter(p => p.Fecha.ToString("dd-MM-yyyy").Contains(datetime),new List<string>{"Compras","Compras.Producto","Compras.Producto.Color","Usuario"})); 
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Pedido pedido){
         if(pedido == null) return BadRequest();

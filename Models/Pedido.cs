@@ -8,7 +8,7 @@ public class Pedido{
     public int Id { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //PARA QUE INSERTE AL INSERTAR EL PRODUCTO
     //[Column("created_at")]
-    public DateTime? Fecha { get; set; } = DateTime.UtcNow;
+    public DateTime Fecha { get; set; } = DateTime.UtcNow;
     public List<Compra>? Compras { get; set; }
     public bool Entrega24h { get; set; }
     public string? Direccion { get; set; }

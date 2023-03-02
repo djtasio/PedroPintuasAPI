@@ -48,7 +48,7 @@ public class ProductoController : ControllerBase
         if(password is null) return BadRequest();*/
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         Producto entity = await _repository.Find(p => p.Productos == producto.Productos && 
-        p.Calidad == producto.Calidad &&  p.Color == p.Color);
+        p.Calidad == producto.Calidad &&  p.Color.Id == producto.Color.Id);
         return await Get(entity.Id);
     }
 }

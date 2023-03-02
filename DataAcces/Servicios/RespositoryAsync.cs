@@ -29,6 +29,11 @@ namespace API_PedroPinturas.DataAccess.Servicios{
            return await EntitySet.ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> GetAllOrderBy(Expression<Func<T, string>> orderby)
+        {
+            return await EntitySet.OrderBy(orderby).ToListAsync();
+        }
+
         // Hacer el InnerJoin genérico
         public async Task<IEnumerable<T>> GetAllInnerJoin(List<string> lista)
         {
@@ -44,21 +49,21 @@ namespace API_PedroPinturas.DataAccess.Servicios{
             return await EntitySet.FindAsync(id);
         }
 
+        public async Task<IEnumerable<T>> GetOrderBy(int id,List<string> lista,Expression<Func<T, bool>> expr,Expression<Func<T, DateTime?>> orderby)
+        {
+             IQueryable<T>? query = EntitySet;
+            lista.ForEach(delegate(string model){
+                query = query.Include(model);
+            });
+            return await query.Where(expr).OrderByDescending(orderby).ToListAsync();
+        }
+
         public async Task<T> GetInnerJoin(int id,Expression<Func<T, bool>> expr,List<string> lista){
             IQueryable<T>? query = EntitySet;
             foreach(string model in lista){
                 query = query.Include(model);
             }
             return await query.FirstOrDefaultAsync(expr);
-        }
-
-        public async Task<T> GetOrderBy(int id,Expression<Func<T, bool>> expr,
-        List<string> lista,Expression<Func<T, DateTime?>> orderby){
-            IQueryable<T>? query = EntitySet;
-            foreach(string model in lista){
-                query = query.Include(model);
-            }
-            return await query.OrderBy(orderby).FirstOrDefaultAsync(expr);
         }
 
         public async Task<T> Insert(T entity)
@@ -87,6 +92,15 @@ namespace API_PedroPinturas.DataAccess.Servicios{
         {
             // NO LE DA SEGUIMIENTO A LA ENTIDAD QUE NOS VA A REFLEJAR LA CONSULTA
             return await EntitySet.AsNoTracking().FirstOrDefaultAsync(expr);
+        }
+
+        public async Task<IEnumerable<T>> Filter(Func<T, bool> predicate,List<string> lista)
+        {
+             IQueryable<T>? query = EntitySet;
+            foreach(string model in lista){
+                query = query.Include(model);
+            }
+            return query.AsNoTracking().ToList().Where(predicate);
         }
 
         public async Task<T> DoEntry(T entity){
