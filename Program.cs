@@ -28,6 +28,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(p=>p.AddPolicy("corspolicy",build =>{
+    //build.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
+// enable single domain
+// multiple domain
+// any domain
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +45,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
+
+app.UseCors("corspolicy");
 
 app.UseHttpsRedirection();
 
