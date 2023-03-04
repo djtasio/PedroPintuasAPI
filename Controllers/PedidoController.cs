@@ -33,7 +33,7 @@ public class PedidoController : ControllerBase
     [HttpGet("user/{id}")]
     public async Task<IActionResult> GetUser(int id)
     {
-       return Ok(await _repository.GetOrderBy(id,new List<string>{"Compras","Compras.Producto","Compras.Producto.Color","Usuario"},p => p.Usuario.Id == id, p => p.Fecha)); 
+       return Ok(await _repository.GetOrderBy(id,new List<string>{"Compras","Compras.Producto","Compras.Producto.Color"},p => p.Usuario.Id == id, p => p.Fecha)); 
     }
 
         // GET by Id action
