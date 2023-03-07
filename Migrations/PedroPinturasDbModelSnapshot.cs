@@ -81,7 +81,7 @@ namespace APIPedroPinturas.Migrations
                     b.Property<bool>("Entrega24h")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("Fecha")
+                    b.Property<DateTime>("Fecha")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
 
@@ -137,8 +137,10 @@ namespace APIPedroPinturas.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Contrasenia")
-                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("NombreApellidos")
                         .HasColumnType("text");
@@ -147,7 +149,6 @@ namespace APIPedroPinturas.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("User")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
