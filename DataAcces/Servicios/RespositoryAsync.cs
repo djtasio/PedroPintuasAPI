@@ -81,6 +81,18 @@ namespace API_PedroPinturas.DataAccess.Servicios{
             return entity;
         }
 
+        /*public async Task<T> DeleteOnCascade(int id, List<String> lista,Expression<Func<T, bool>> expr)
+        {
+            IQueryable<T>? query = EntitySet;
+            foreach(string model in lista){
+                query = query.Include(model);
+            }
+            T entity = EntitySet.Include("fd");
+            EntitySet.Remove(entity);
+            await Save();
+            return entity;
+        }*/
+
         public async Task Update(T entity)
         {
             Db.Entry(entity).State = EntityState.Modified;
