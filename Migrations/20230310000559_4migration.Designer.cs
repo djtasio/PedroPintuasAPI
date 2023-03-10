@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230306131853_adminmigration")]
-    partial class adminmigration
+    [Migration("20230310000559_4migration")]
+    partial class _4migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace APIPedroPinturas.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PedidoId")
+                    b.Property<int>("PedidoId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("ProductoId")
@@ -88,15 +88,15 @@ namespace APIPedroPinturas.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("integer");
+
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(5, 2)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Pedidos");
                 });
@@ -164,22 +164,26 @@ namespace APIPedroPinturas.Migrations
 
             modelBuilder.Entity("API_PedroPinturas.Models.Compra", b =>
                 {
-                    b.HasOne("API_PedroPinturas.Models.Pedido", null)
+                    b.HasOne("API_PedroPinturas.Models.Pedido", "pedido")
                         .WithMany("Compras")
-                        .HasForeignKey("PedidoId");
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API_PedroPinturas.Models.Producto", "Producto")
                         .WithMany()
                         .HasForeignKey("ProductoId");
 
                     b.Navigation("Producto");
+
+                    b.Navigation("pedido");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.HasOne("API_PedroPinturas.Models.Usuario", "Usuario")
                         .WithMany("Pedidos")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -34,10 +34,7 @@ public class ProductoController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Producto producto){
         if(producto == null) return BadRequest();
-        //Si lo que me están mandando no coincide con el modelo que yo he recibido
-        if(!ModelState.IsValid) return BadRequest(ModelState);
-        //Do entry porque el color que le añadimos al producto ya existe en la base de datos y por
-        //tanto no queremos insertarlo, sino cogerlo
+        Console.WriteLine(producto.Id);
         var created = await _repository.DoEntry(producto);
         return Created("created",created);
     }
@@ -50,5 +47,22 @@ public class ProductoController : ControllerBase
         Producto entity = await _repository.Find(p => p.Productos == producto.Productos && 
         p.Calidad == producto.Calidad &&  p.Color.Id == producto.Color.Id);
         return await Get(entity.Id);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] Producto producto){
+        if (id != producto.Id) return BadRequest();
+        if(producto == null) return BadRequest();
+
+        await _repository.Update(producto);
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id){
+        var producto = await _repository.Get(id);
+        if(producto is null) return NotFound();
+        await _repository.Delete(id);
+        return NoContent();
     }
 }

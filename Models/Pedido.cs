@@ -9,12 +9,13 @@ public class Pedido{
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //PARA QUE INSERTE AL INSERTAR EL PRODUCTO
     //[Column("created_at")]
     public DateTime Fecha { get; set; } = DateTime.UtcNow;
-    public List<Compra>? Compras { get; set; }
+    public ICollection<Compra>? Compras { get; set; }
     public bool Entrega24h { get; set; }
     public string? Direccion { get; set; }
     [Column(TypeName = "decimal(5, 2)")]
     public double Precio { get; set; }
 
-    [ForeignKey("UsuarioId")]
-    public virtual Usuario Usuario {get;set;}
+    [ForeignKey("Usuario")]
+    public int IdUsuario {get;set;}
+    public Usuario? Usuario {get;set;}
 }

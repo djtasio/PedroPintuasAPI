@@ -58,6 +58,13 @@ public class UsuarioController : ControllerBase
         return NoContent();
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id){
+        var user = await _repository.Get(id);
+        if(user is null) return NotFound();
+        await _repository.DeleteOnCascade(id,u => u.Id == id,new List<string>{"Pedidos","Pedidos.Compras"});
+        return NoContent();
+    }
 
     [HttpPost("Login")]
     public async Task<int> Login([FromBody] Usuario user){

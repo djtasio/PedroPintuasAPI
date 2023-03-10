@@ -16,10 +16,5 @@ public class Usuario{
     //[Range(8, 10)]
     public int Telefono { get; set; }
     public bool IsAdmin { get; set;}
-    public List<Pedido>? Pedidos{ get; set; }
-
-    public static implicit operator int(Usuario v)
-    {
-        throw new NotImplementedException();
-    }
+    public ICollection<Pedido>? Pedidos{ get; set; }
 }

@@ -32,7 +32,7 @@ public class CompraController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] List<Compra> compras){
         if(compras == null) return BadRequest();
-        if(!ModelState.IsValid) return BadRequest(ModelState);
+        //if(!ModelState.IsValid) return BadRequest(ModelState);
         List<Compra> comprasDevolver = new List<Compra>();
         foreach(Compra compra in compras){
             var created = await _repository.DoEntry(compra);

@@ -81,17 +81,17 @@ namespace API_PedroPinturas.DataAccess.Servicios{
             return entity;
         }
 
-        /*public async Task<T> DeleteOnCascade(int id, List<String> lista,Expression<Func<T, bool>> expr)
+        public async Task<T> DeleteOnCascade(int id,Expression<Func<T, bool>> expr,List<String> lista)
         {
             IQueryable<T>? query = EntitySet;
             foreach(string model in lista){
                 query = query.Include(model);
             }
-            T entity = EntitySet.Include("fd");
-            EntitySet.Remove(entity);
+            T entity = await query.Where(expr).FirstOrDefaultAsync();
+            EntitySet.RemoveRange(entity);
             await Save();
             return entity;
-        }*/
+        }
 
         public async Task Update(T entity)
         {

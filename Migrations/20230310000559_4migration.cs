@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     /// <inheritdoc />
-    public partial class adminmigration : Migration
+    public partial class _4migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,14 +75,14 @@ namespace APIPedroPinturas.Migrations
                     Entrega24h = table.Column<bool>(type: "boolean", nullable: false),
                     Direccion = table.Column<string>(type: "text", nullable: true),
                     Precio = table.Column<decimal>(type: "numeric(5,2)", nullable: false),
-                    UsuarioId = table.Column<int>(type: "integer", nullable: false)
+                    IdUsuario = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_Pedidos_Usuarios_IdUsuario",
+                        column: x => x.IdUsuario,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -96,7 +96,7 @@ namespace APIPedroPinturas.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ProductoId = table.Column<int>(type: "integer", nullable: true),
                     Cantidad = table.Column<int>(type: "integer", nullable: false),
-                    PedidoId = table.Column<int>(type: "integer", nullable: true)
+                    PedidoId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,7 +105,8 @@ namespace APIPedroPinturas.Migrations
                         name: "FK_Compra_Pedidos_PedidoId",
                         column: x => x.PedidoId,
                         principalTable: "Pedidos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Compra_Productos_ProductoId",
                         column: x => x.ProductoId,
@@ -124,9 +125,9 @@ namespace APIPedroPinturas.Migrations
                 column: "ProductoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_UsuarioId",
+                name: "IX_Pedidos_IdUsuario",
                 table: "Pedidos",
-                column: "UsuarioId");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Productos_ColorId",
