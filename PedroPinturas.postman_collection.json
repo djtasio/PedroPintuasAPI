@@ -1,0 +1,764 @@
+{
+	"info": {
+		"_postman_id": "caf3bac7-45f1-41b6-8b0d-a1be9c259fce",
+		"name": "Collection-PedroPinturas",
+		"description": "# #Pruebas con los diferentes casos de la api#\n\n## ##Casos:##\n\n### \\*Usuario\\*\n\n\\-Insertar\n\n\\-Actualizar\n\n\\-Obtener todos\n\n\\-Filtrar por id\n\n\\-Eliminar\n\n\\-Sacar los datos, pedidos y compras\n\n\\-Login\n\n\\-Checkear registro\n\n### \\*Colores\\*\n\n\\-Mostrar todos\n\n\\-Filtrar por id\n\n\\-Insertar\n\n\\-Actualizar\n\n\\-Eliminar\n\n### \\*Compra\\*\n\n\\-Mostrar todas\n\n\\-Insertar\n\n\\-Filtrar por id\n\n### \\*Producto\\*\n\n\\-Mostrar todos\n\n\\-Insertar\n\n\\-Filtrar por id\n\n\\-Actualizar\n\n\\-Eliminar\n\n\\-Filtrar con color,calidad y tipo\n\n### \\*Pedido\\*\n\n\\-Insertar\n\n\\-Actualizar\n\n\\-Mostrar todos\n\n\\-Filtrar por id\n\n\\-Filtrar por user\n\n\\-Filtrar por fecha\n\n\\-Eliminar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25384102"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"string\",\r\n    \"contrasenia\":\"string\",\r\n    \"nombreApellidos\":\"string\",\r\n    \"telefono\":0,\r\n    \"isAdmin\":false\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"user\":\"string\",\r\n    \"contrasenia\":\"string\",\r\n    \"nombreApellidos\":\"string\",\r\n    \"telefono\":0,\r\n    \"isAdmin\":false\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario/pedidos/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"user\": \"Tzeentch\",\r\n\"contrasenia\":\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario/Login",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-check-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Usuario/Username/Tzeentch",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Usuario",
+								"Username",
+								"Tzeentch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Colores",
+			"item": [
+				{
+					"name": "Mostrar-disponibles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Color",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Color"
+							]
+						},
+						"description": "Petición GET donde pedimos los colores y nos devuelve 200 OK y el listado en formato JSON de los colores disponibles"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Color/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Color",
+								"1"
+							]
+						},
+						"description": "Buscamos un color por filtro id con petición GET y nos devuelve el color correspondiente"
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"code\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Color",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Color"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"string\",\r\n  \"code\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Color/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Color",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Color/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Color",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Compra",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Compra",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Compra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"color\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"code\": \"string\"\r\n  },\r\n  \"precio\": 0,\r\n  \"descripcion\": \"string\",\r\n  \"calidad\": \"string\",\r\n  \"productos\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Compra",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Compra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Compra/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Compra",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Producto",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Producto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"color\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"code\": \"string\"\r\n  },\r\n  \"precio\": 0,\r\n  \"descripcion\": \"string\",\r\n  \"calidad\": \"string\",\r\n  \"productos\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Producto",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Producto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Producto/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Producto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"color\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"code\": \"string\"\r\n  },\r\n  \"precio\": 0,\r\n  \"descripcion\": \"string\",\r\n  \"calidad\": \"string\",\r\n  \"productos\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Producto/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Producto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido/2",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check-product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"color\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"code\": \"string\"\r\n  },\r\n  \"precio\": 0,\r\n  \"descripcion\": \"string\",\r\n  \"calidad\": \"string\",\r\n  \"productos\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Producto/CheckProduct",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Producto",
+								"CheckProduct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"compras\": [\r\n    {\r\n      \"producto\": {\r\n        \"id\": 0,\r\n        \"precio\": 0,\r\n        \"descripcion\": \"string\",\r\n        \"calidad\": \"string\",\r\n        \"productos\": \"string\"\r\n      },\r\n      \"cantidad\": 0\r\n    }\r\n  ],\r\n  \"entrega24h\": true,\r\n  \"direccion\": \"string\",\r\n  \"precio\": 0,\r\n  \"idUsuario\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n  \"compras\": [\r\n    {\r\n      \"producto\": {\r\n        \"id\": 0,\r\n        \"precio\": 0,\r\n        \"descripcion\": \"string\",\r\n        \"calidad\": \"string\",\r\n        \"productos\": \"string\"\r\n      },\r\n      \"cantidad\": 0\r\n    }\r\n  ],\r\n  \"entrega24h\": true,\r\n  \"direccion\": \"string\",\r\n  \"precio\": 0,\r\n  \"idUsuario\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido/1",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido/user/4",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido",
+								"user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-datetime",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido/date/11-03-2023",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido",
+								"date",
+								"11-03-2023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://apipedropinturas.azurewebsites.net/Pedido/2",
+							"protocol": "https",
+							"host": [
+								"apipedropinturas",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Pedido",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
