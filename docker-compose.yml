@@ -9,10 +9,13 @@ services:
     depends_on:
       - "app_db"
     container_name: api-compose
+    # enumeracion de los puertos que queremos mapear = puerto anfitrion : puerto contenedor
     ports:
       - "6677:5062"
     build:
+      #indicamos al archivo dockercompose donde se encuentra la app
       context: .
+      #indicamos que construya la imagen utilizando Dockerfile
       dockerfile: Dockerfile
     environment:
       - ConnectionStrings__PostgresqlConnection=User ID=postgres;Password=sanvalero12;Server=app_db;Port=5432;Database=PedroPinturasFinalDB; IntegratedSecurity=true;Pooling=true;
@@ -29,12 +32,13 @@ services:
     ports:
       - 7766:5432
     restart: always
+    #indicamos a app_db los volumenes que va a utilizar = volumen : ruta dentro del contenedor donde se montara el volumen
     volumes:
       - app_data:/var/lib/postgresql/data
       - ./database:/var/lib/postgresql/data
     networks:
       - dev
-
+#definimos todos los volumenes que van a utilizar los contenedores
 volumes:
   app_data:
 

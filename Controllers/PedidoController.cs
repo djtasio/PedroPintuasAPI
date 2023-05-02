@@ -47,6 +47,7 @@ public class PedidoController : ControllerBase
         if(pedido == null) return BadRequest();
         //Si lo que me están mandando no coincide con el modelo que yo he recibido
         //if(!ModelState.IsValid) return BadRequest(ModelState);
+        //Con DoAttach me relaciona pedido y compra al insertarlos
         var created = await _repository.DoAttach(pedido);
         return Created("created",created);
     }

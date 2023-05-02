@@ -32,6 +32,17 @@ builder.Services.AddCors(p=>p.AddPolicy("corspolicy",build =>{
     //build.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyHeader();
     build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
+builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "frontend",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+builder.Services.AddMvc().AddMvcOptions(e => e.EnableEndpointRouting = false);
+
+
 
 // enable single domain
 // multiple domain
@@ -47,6 +58,7 @@ var app = builder.Build();
 //}
 
 app.UseCors("corspolicy");
+app.UseCors("frontend");
 
 app.UseHttpsRedirection();
 

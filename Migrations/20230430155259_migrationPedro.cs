@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     /// <inheritdoc />
-    public partial class _4migration : Migration
+    public partial class migrationPedro : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
