@@ -9,10 +9,12 @@ namespace API_PedroPinturas.Controllers;
 public class CompraController : ControllerBase
 {
     private readonly RespositoryAsync<Compra> _repository;
-    public CompraController(RespositoryAsync<Compra> repository)
-    {
-        _repository = repository;
-    }
+    private readonly ILogger<CompraController> _logger;
+    public CompraController(RespositoryAsync<Compra> repository, ILogger<CompraController> logger)
+{
+    _repository = repository;
+    _logger = logger;
+}
 
     // GET all action
     [HttpGet]
