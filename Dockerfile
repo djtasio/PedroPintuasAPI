@@ -17,6 +17,6 @@ WORKDIR /App
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "API_PedroPinturas.dll"]
 
-# construye una imagen de Docker para una aplicación ASP.NET Core 6.0. 
+# Este archivo construye una imagen de Docker para una aplicación ASP.NET Core 6.0. 
 # Copia los archivos de la aplicación, restaura las dependencias, compila y publica
 #  la aplicación en modo de lanzamiento, y finalmente crea un contenedor que ejecuta la aplicación ASP.NET Core cuando se inicia.
