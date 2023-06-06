@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230430155259_migrationPedro")]
-    partial class migrationPedro
+    [Migration("20230606163814_migrationAzure")]
+    partial class migrationAzure
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
