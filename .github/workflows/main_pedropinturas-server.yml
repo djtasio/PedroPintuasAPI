@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - APIPedroPinturas
+name: Build and deploy ASP.Net Core app to Azure Web App - pedropinturas-server
 
 on:
   push:
     branches:
-      - azure
+      - main
   workflow_dispatch:
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'APIPedroPinturas'
+          app-name: 'pedropinturas-server'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C16453D88C4543B184F8DBCB989E92F9 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D50E5C05660A479ABCF36748BA03CEC9 }}
           package: .
