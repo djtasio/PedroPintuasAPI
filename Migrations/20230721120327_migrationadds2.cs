@@ -5,7 +5,7 @@
 namespace APIPedroPinturas.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationAzure : Migration
+    public partial class migrationadds2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

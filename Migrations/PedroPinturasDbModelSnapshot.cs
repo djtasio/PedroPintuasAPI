@@ -218,7 +218,7 @@ namespace APIPedroPinturas.Migrations
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.HasOne("API_PedroPinturas.Models.Usuario", "Usuario")
-                        .WithMany("Pedidos")
+                        .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -250,11 +250,6 @@ namespace APIPedroPinturas.Migrations
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.Navigation("Compras");
-                });
-
-            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230606163814_migrationAzure")]
-    partial class migrationAzure
+    [Migration("20230721120327_migrationadds2")]
+    partial class migrationadds2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,40 @@ namespace APIPedroPinturas.Migrations
                     b.HasIndex("ProductoId");
 
                     b.ToTable("Compra");
+                });
+
+            modelBuilder.Entity("API_PedroPinturas.Models.Evento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("AireLibre")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Event")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Lugar")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Materiales")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Event")
+                        .IsUnique();
+
+                    b.ToTable("Eventos");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
@@ -142,6 +176,9 @@ namespace APIPedroPinturas.Migrations
                     b.Property<string>("Contrasenia")
                         .HasColumnType("text");
 
+                    b.Property<int?>("EventoId")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
@@ -155,6 +192,8 @@ namespace APIPedroPinturas.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventoId");
 
                     b.HasIndex("User")
                         .IsUnique();
@@ -182,7 +221,7 @@ namespace APIPedroPinturas.Migrations
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.HasOne("API_PedroPinturas.Models.Usuario", "Usuario")
-                        .WithMany("Pedidos")
+                        .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -199,14 +238,21 @@ namespace APIPedroPinturas.Migrations
                     b.Navigation("Color");
                 });
 
+            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
+                {
+                    b.HasOne("API_PedroPinturas.Models.Evento", null)
+                        .WithMany("Usuarios")
+                        .HasForeignKey("EventoId");
+                });
+
+            modelBuilder.Entity("API_PedroPinturas.Models.Evento", b =>
+                {
+                    b.Navigation("Usuarios");
+                });
+
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.Navigation("Compras");
-                });
-
-            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }
