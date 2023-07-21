@@ -19,6 +19,7 @@ builder.Services.AddScoped<RespositoryAsync<Usuario>, RespositoryAsync<Usuario>>
 builder.Services.AddScoped<RespositoryAsync<Pedido>, RespositoryAsync<Pedido>>();
 builder.Services.AddScoped<RespositoryAsync<Compra>, RespositoryAsync<Compra>>();
 builder.Services.AddScoped<RespositoryAsync<Producto>, RespositoryAsync<Producto>>();
+builder.Services.AddScoped<RespositoryAsync<Evento>, RespositoryAsync<Evento>>();
 // """DATABASE AND DEPENDENCY INJECTION""" //
 
 // Add services to the container.

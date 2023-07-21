@@ -11,4 +11,5 @@ public class PedroPinturasDb : DbContext{
     public DbSet<Pedido> Pedidos => Set<Pedido>();
     public DbSet<Producto> Productos => Set<Producto>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
+    public DbSet<Evento> Eventos => Set<Evento>();
 }
