@@ -28,5 +28,30 @@ public class EventoController : ControllerBase
         return Created("created",created);
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
+    {
+       var usuario = await _repository.Get(id);
+       if(usuario == null) return NotFound();
+       return Ok(await _repository.Get(id)); 
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id){
+        var evento = await _repository.Get(id);
+        if(evento is null) return NotFound();
+        await _repository.Delete(id);
+        return NoContent();
+    }
+    //revisar
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] Evento evento){
+        if (id != evento.Id) return BadRequest();
+        if(evento == null) return BadRequest();
+
+        await _repository.Update(evento);
+        return NoContent();
+    }
+
     
 }
