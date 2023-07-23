@@ -16,5 +16,7 @@ public class Usuario{
     //[Range(8, 10)]
     public int Telefono { get; set; }
     public bool IsAdmin { get; set;}
+    public ICollection<Pedido> ?Pedidos { get; set; }
+    public ICollection<UsuarioEvento> ?UsuarioEventos { get; set; }
     
 }

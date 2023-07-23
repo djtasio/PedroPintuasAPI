@@ -14,5 +14,5 @@ public class Evento{
     public string? Materiales { get; set; }
     public DateTime Fecha { get; set; }
     public bool AireLibre { get; set;}
-    public ICollection<Usuario>? Usuarios{ get; set; }
+    public ICollection<UsuarioEvento>? UsuarioEventos{ get; set; }
 }

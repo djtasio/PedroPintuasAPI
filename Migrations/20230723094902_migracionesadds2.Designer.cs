@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230721120327_migrationadds2")]
-    partial class migrationadds2
+    [Migration("20230723094902_migracionesadds2")]
+    partial class migracionesadds2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,9 +176,6 @@ namespace APIPedroPinturas.Migrations
                     b.Property<string>("Contrasenia")
                         .HasColumnType("text");
 
-                    b.Property<int?>("EventoId")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
@@ -193,12 +190,33 @@ namespace APIPedroPinturas.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventoId");
-
                     b.HasIndex("User")
                         .IsUnique();
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("API_PedroPinturas.Models.UsuarioEvento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EventoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("UsuarioEvento");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Compra", b =>
@@ -221,7 +239,7 @@ namespace APIPedroPinturas.Migrations
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.HasOne("API_PedroPinturas.Models.Usuario", "Usuario")
-                        .WithMany()
+                        .WithMany("Pedidos")
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -238,21 +256,40 @@ namespace APIPedroPinturas.Migrations
                     b.Navigation("Color");
                 });
 
-            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
+            modelBuilder.Entity("API_PedroPinturas.Models.UsuarioEvento", b =>
                 {
-                    b.HasOne("API_PedroPinturas.Models.Evento", null)
-                        .WithMany("Usuarios")
-                        .HasForeignKey("EventoId");
+                    b.HasOne("API_PedroPinturas.Models.Evento", "Evento")
+                        .WithMany("UsuarioEventos")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API_PedroPinturas.Models.Usuario", "Usuario")
+                        .WithMany("UsuarioEventos")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Evento");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Evento", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("UsuarioEventos");
                 });
 
             modelBuilder.Entity("API_PedroPinturas.Models.Pedido", b =>
                 {
                     b.Navigation("Compras");
+                });
+
+            modelBuilder.Entity("API_PedroPinturas.Models.Usuario", b =>
+                {
+                    b.Navigation("Pedidos");
+
+                    b.Navigation("UsuarioEventos");
                 });
 #pragma warning restore 612, 618
         }
