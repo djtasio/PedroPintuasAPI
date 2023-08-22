@@ -84,8 +84,8 @@ namespace APIPedroPinturas.Migrations
                     b.Property<string>("Event")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Fecha")
+                        .HasColumnType("text");
 
                     b.Property<string>("Lugar")
                         .HasColumnType("text");

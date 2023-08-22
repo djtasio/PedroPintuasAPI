@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIPedroPinturas.Migrations
 {
     [DbContext(typeof(PedroPinturasDb))]
-    [Migration("20230810150408_migraciones")]
-    partial class migraciones
+    [Migration("20230810154531_migracionesadds2")]
+    partial class migracionesadds2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,8 +87,8 @@ namespace APIPedroPinturas.Migrations
                     b.Property<string>("Event")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Fecha")
+                        .HasColumnType("text");
 
                     b.Property<string>("Lugar")
                         .HasColumnType("text");
