@@ -43,15 +43,50 @@ public class EventoController : ControllerBase
         await _repository.Delete(id);
         return NoContent();
     }
-    //revisar
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Evento evento){
-        if (id != evento.Id) return BadRequest();
-        if(evento == null) return BadRequest();
 
-        await _repository.Update(evento);
-        return NoContent();
+    
+    [HttpPut("{id}")]
+public async Task<IActionResult> Update(int id, [FromBody] Evento eventoToUpdate)
+{
+    var existingEvento = await _repository.Get(id);
+    if (existingEvento == null) return NotFound();
+
+    existingEvento.Event = eventoToUpdate.Event;
+    existingEvento.Lugar = eventoToUpdate.Lugar;
+    existingEvento.Descripcion = eventoToUpdate.Descripcion;
+    existingEvento.Materiales = eventoToUpdate.Materiales;
+    existingEvento.Fecha = eventoToUpdate.Fecha;
+    existingEvento.AireLibre = eventoToUpdate.AireLibre;
+
+    await _repository.Update(existingEvento);
+
+    return NoContent();
+}
+
+[HttpGet("CheckEvent/{eventName}"), ActionName("CheckEventname")]
+    public async Task<int> checkEventName(string eventName){
+        Evento entity = await _repository.Find(e => e.Event == eventName);
+        if(entity != null){
+            return entity.Id;
+        } else {
+            return -1;
+        }
     }
+
+// [HttpGet("CheckEvent/{eventName}")]
+// public async Task<IActionResult> CheckEvent(string eventName)
+// {
+//     var eventEntity = await _repository.Find(e => e.Event == eventName);
+//     if (eventEntity != null)
+//     {
+//         return Ok(false); // El evento no está disponible
+//     }
+//     else
+//     {
+//         return Ok(true); // El evento está disponible
+//     }
+// }
+
 
     
 }
