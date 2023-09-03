@@ -72,21 +72,5 @@ public async Task<IActionResult> Update(int id, [FromBody] Evento eventoToUpdate
             return -1;
         }
     }
-
-// [HttpGet("CheckEvent/{eventName}")]
-// public async Task<IActionResult> CheckEvent(string eventName)
-// {
-//     var eventEntity = await _repository.Find(e => e.Event == eventName);
-//     if (eventEntity != null)
-//     {
-//         return Ok(false); // El evento no está disponible
-//     }
-//     else
-//     {
-//         return Ok(true); // El evento está disponible
-//     }
-// }
-
-
     
 }
